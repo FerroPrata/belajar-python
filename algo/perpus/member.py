@@ -22,10 +22,13 @@ def regis():
     attempts = 0
     print("Program Login Kasir".center(panjang))
 
+    with open("user_data.txt", "r") as file:
+        lines = file.readlines()
+        
     while attempts < max_attempts:
         username = input("Masukkan username : ")
         password = input("Masukkan password : ")
-        if username == f"{username}" and password == f"{password}":
+        if any(line.strip() == f"{username},{password}" for line in lines):
             print("Login berhasil!")
             inti()
         else:
