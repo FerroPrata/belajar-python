@@ -22,20 +22,21 @@ def regis():
     attempts = 0
     print("Program Login Kasir".center(panjang))
 
+    with open("user_data.txt", "r") as file:#menambah agar fungsi mengread database user login
+        lines = file.readlines()
+
+
     while attempts < max_attempts:
         username = input("Masukkan username : ")
         password = input("Masukkan password : ")
-        if username == f"{username}" and password == f"{password}":
+        if any(line.strip() == f"{username},{password}" for line in lines):
             print("Login berhasil!")
             inti()
         else:
             print("Login gagal. Coba lagi.")
-            attempts + 1
-
-    if attempts == max_attempts:
-        print("Anda telah melebihi batas percobaan login.")
-
-
+            attempts += 1
+            if attempts == max_attempts:#jika percobaan lebih dari 3x program otomatis berhenti
+                print("Anda telah melebihi batas percobaan login.")
 
 def inti():
     pilihan = int(input("pilih"))
