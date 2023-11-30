@@ -24,5 +24,3 @@ def pj(a):
     with open('/backup data 2023/optional/belajar python/algo/perpus/data_buku.json', 'w') as file:
         # Use ts_instance.buku directly to update and write to the file
         json.dump(ts_instance.buku, file, indent=2)
-
-

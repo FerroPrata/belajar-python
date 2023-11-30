@@ -24,4 +24,3 @@ def kmb(a):
     # Print the updated dictionary
     for i, data in ts_instance.buku.items():
         print(i, data["tersedia"])
-
