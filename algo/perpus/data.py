@@ -9,6 +9,12 @@ class Tes:
                 self.buku = json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             self.buku = {}
+    def __inti__(self, file_path='/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json'):
+        try:
+            with open(file_path, 'r') as file:
+                self.bukti = json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            self.bukti = {}
 
     def save_to_file(self, file_path='/backup data 2023/optional/belajar python/algo/perpus/data_buku.json'):
         with open(file_path, 'w') as file:
