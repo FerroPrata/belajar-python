@@ -1,22 +1,24 @@
 {
+  "fadil": {
+    "nama": "fadil",
+    "pinjaman": [
+      {
+        "judul_buku": "laskar pelangi",
+        "bukti_waktu": "2023/12/02",
+        "deadline": "2023/12/09"
+      }
+    ],
+    "sebagai": "dosen"
+  },
   "hafidz": {
     "nama": "hafidz",
     "pinjaman": [
-      "Pohon Aot"
-    ]
-  },
-  "fadil": {
-    "nama": "fadil",
-    "pinjaman": []
-  },
-  "arya": {
-    "nama": "arya",
-    "pinjaman": [
-      "Pohon Aot"
-    ]
-  },
-  "ferosi": {
-    "nama": "ferosi",
-    "pinjaman": []
+      {
+        "judul_buku": "laskar pelangi",
+        "bukti_waktu": "2023/12/02",
+        "deadline": "2023/12/09"
+      }
+    ],
+    "sebagai": "tamu"
   }
 }

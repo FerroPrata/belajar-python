@@ -1,17 +1,49 @@
 from data import Tes
 
-
 def tambah_buku():
     kt = "Fiksi", "Non-Fiksi", "Sains", "Komedi"
     ts_instance = Tes()
     judul = input("Masukkan judul buku: ")
-    total = int(input("Masukkan jumlah total stok buku: "))
-    kategori = input("Masukkan kategori buku: ")
-    if kategori not in kt:
-        print("kategori tidak tersedia di perpus ini")
-    else:
-        ts_instance.tambah_buku(judul, total, kategori)
-        ts_instance.save_to_file()
+    while True:
+        try:
+            total = int(input("Masukkan jumlah total stok buku: "))
+            if not total:
+                ("masukan angka")
+            else:
+                break
+        except ValueError:
+                    print("masukan angka")
+    while True:
+        try:
+            kategori = input("Masukkan kategori buku: ")
+            if kategori in kt:
+                break
+            else:
+                ("kategori tidak tersedi")
+        except ValueError:
+                    print("kategori tidak tersedi")
+    while True:
+        try:
+            thn_terbit = int(input("Masukkan tahun terbit buku: "))
+            if not thn_terbit:
+                ("masukan angka")
+            else:
+                break
+        except ValueError:
+                    print("masukan angka")
+    penulis = input("Masukkan penulis buku: ") #penulis buku
+    penerbit = input("Masukkan penerbit buku: ") #penerbit
+    while True:
+        try:
+            jumlah_hal = int(input("Masukkan jumlah halaman buku: "))
+            if not jumlah_hal:
+                ("masukan angka")
+            else:
+                break
+        except ValueError:
+                    print("masukan angka")
+    ts_instance.tambah_buku(judul, total, kategori, thn_terbit, penulis, penerbit, jumlah_hal)
+    ts_instance.save_to_file()
 
-# Contoh pemanggilan fungsi tambah_buku
 tambah_buku()
+

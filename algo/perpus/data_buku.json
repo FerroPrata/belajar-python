@@ -1,22 +1,20 @@
 {
-  "Pohon Aot": {
-    "total": 10,
-    "tersedia": 8,
-    "kategori": "Fiksi"
+  "hari pot": {
+    "total": 30,
+    "tersedia": 30,
+    "kategori": "Fiksi",
+    "tahun_terbit": "2020",
+    "Penulis": "ryan",
+    "Penerbit": "sinar dunia",
+    "jumlah_halaman": "120"
   },
-  "Kuda Melompat": {
-    "total": 5,
-    "tersedia": 4,
-    "kategori": "Non-Fiksi"
-  },
-  "Pembentukan berlian di minecraft": {
-    "total": 8,
-    "tersedia": 8,
-    "kategori": "Sains"
-  },
-  "adit sopo jarwo": {
-    "total": 3,
-    "tersedia": 1,
-    "kategori": "Komedi"
+  "laskar pelangi": {
+    "total": 20,
+    "tersedia": 14,
+    "kategori": "Komedi",
+    "tahun_terbit": 2013,
+    "Penulis": "adit",
+    "Penerbit": "sinar dunia",
+    "jumlah_halaman": 405
   }
 }

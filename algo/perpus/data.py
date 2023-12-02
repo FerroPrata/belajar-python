@@ -20,9 +20,9 @@ class Tes:
         with open(file_path, 'w') as file:
             json.dump(self.buku, file, indent=2)
 
-    def tambah_buku(self, judul, total, kategori):
+    def tambah_buku(self, judul, total, kategori, thn_terbit, penulis, penerbit, jumlah_hal):
         if judul not in self.buku:
-            self.buku[judul] = {"total": total, "tersedia": total, "kategori": kategori}
+            self.buku[judul] = {"total": total, "tersedia": total, "kategori": kategori, "tahun_terbit": thn_terbit, "Penulis": penulis, "Penerbit": penerbit, "jumlah_halaman": jumlah_hal }
             print(f"Buku {judul} berhasil ditambahkan.")
         else:
             print(f"Buku dengan judul {judul} sudah ada.")
