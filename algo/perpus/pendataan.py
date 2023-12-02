@@ -7,6 +7,10 @@ def tambah_buku():
     judul = input("Masukkan judul buku: ")
     total = int(input("Masukkan jumlah total stok buku: "))
     kategori = input("Masukkan kategori buku: ")
+    thn_terbit = input("Masukkan tahun terbit buku: ") #tahun terbit
+    penulis = input("Masukkan penulis buku: ") #penulis buku
+    penerbit = input("Masukkan penerbit buku: ") #penerbit
+    jumlah_hal = input("Masukkan jumlah halaman buku: ") #jumlah halaman
     if kategori not in kt:
         print("kategori tidak tersedia di perpus ini")
     else:
