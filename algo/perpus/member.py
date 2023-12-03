@@ -5,6 +5,7 @@ import getpass
 import msvcrt
 import time
 from kategori import *
+from tes import *
 
 
 
@@ -87,13 +88,13 @@ def regis():
 
 def inti():
     global bc
+    global bb
     pilihan = int(input("Apakah anda ingin |(1) meminjam buku | (2) mengembalikan buku | (3) melihat kategori| : buku(1/2/3): "))
     if pilihan == 1:
         bc = str(input("buku yang di pinjam : "))
         pj(a=bc)
     elif pilihan == 2:
-        bb = str(input("buku yang di kembalikan : "))
-        kmb(a=bb)
+        kmb()
     elif pilihan == 3:
         print_buku_by_kategori()
     else:
@@ -102,65 +103,69 @@ def inti():
 import json
 from data import tes as ts
 
-def kmb(a):
-        with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
-            data = json.load(file)
-        # Call the function to get an instance of the Tes class
-        ts_instance = ts()
-        usr = username
 
-        tanggal_format = "%Y/%m/%d"
-        if not data[usr]["pinjaman"]:
-            print(f"{usr} tidak meminjam buku apa pun.")
-        else:
-            if a not in data[usr]["pinjaman"][0]["judul_buku"]:
-                print(f"{usr} tidak meminjam buku apa pun.")
+
+def kmb():
+    with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
+        data = json.load(file)
+
+    kode_struk_input = input("Masukkan kode struk : ")
+    list_kode_struk = kode_struk_input.split(',')
+    ts_instance = Tes()
+    usr = username
+    tanggal_format = "%Y/%m/%d"
+
+    if not data[usr]["pinjaman"]:
+        print(f"{usr} tidak meminjam buku apa pun.")
+    else:
+        for b in list_kode_struk:
+            buku_peminjaman = next((pinjaman for pinjaman in data[usr]["pinjaman"] if pinjaman["kode_struk"] == b), None)
+            if not buku_peminjaman:
+                print(f"{usr} tidak meminjam buku dengan kode struk {b}.")
             else:
-                if a in ts_instance.buku:
-                    if ts_instance.buku[a]["tersedia"] < ts_instance.buku[a]["total"]:
+                judul_buku = buku_peminjaman["judul_buku"]
+
+                if judul_buku in ts_instance.buku:
+                    if ts_instance.buku[judul_buku]["tersedia"] < ts_instance.buku[judul_buku]["total"]:
                         now = datetime.datetime.today()
-                        deadlinee = data[usr]["pinjaman"][0]["deadline"]
+                        deadlinee = buku_peminjaman["deadline"]
                         datetime_bukti_deadline = datetime.datetime.strptime(deadlinee, tanggal_format)
+
                         if datetime_bukti_deadline < now:
-                            dendaw = datetime.datetime.now() - datetime_bukti_deadline 
+                            dendaw = datetime.datetime.now() - datetime_bukti_deadline
                             print("kamu telat : ", dendaw.days, "hari")
                             jumlahd = dendaw.days * 1000
                             print(f"Rp {jumlahd}")
-                            ts_instance.buku[a]["tersedia"] += 1
-                            pinjaman_baru = [pinjaman for pinjaman in data[usr]["pinjaman"] if pinjaman["judul_buku"] != a]
-                            data[usr]["pinjaman"] = pinjaman_baru
-                        else:
-                            ts_instance.buku[a]["tersedia"] += 1
-                            pinjaman_baru = [pinjaman for pinjaman in data[usr]["pinjaman"] if pinjaman["judul_buku"] != a]
-                            data[usr]["pinjaman"] = pinjaman_baru
-                            print("terimakasih telah mengembalikan buku")
-                        print(f"Buku {a} berhasil dikembalikan.")
+
+                        ts_instance.buku[judul_buku]["tersedia"] += 1
+                        pinjaman_baru = [pinjaman for pinjaman in data[usr]["pinjaman"] if pinjaman["kode_struk"] != b]
+                        data[usr]["pinjaman"] = pinjaman_baru
+
+                        print(f"Buku {judul_buku} dengan kode struk {b} berhasil dikembalikan.")
                     else:
-                        print(f"Maaf, stok buku {a} sudah penuh.")
+                        print(f"Maaf, stok buku {judul_buku} sudah penuh.")
                 else:
-                    print(f"Buku {a} tidak valid atau tidak sedang dipinjam.")
+                    print(f"Buku {judul_buku} tidak valid atau tidak sedang dipinjam.")
 
+    with open('/backup data 2023/optional/belajar python/algo/perpus/data_buku.json', 'w') as file:
+        json.dump(ts_instance.buku, file, indent=2)
 
+    with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json', 'w') as file:
+        json.dump(data, file, indent=2)
 
-                with open('/backup data 2023/optional/belajar python/algo/perpus/data_buku.json', 'w') as file:
-                    json.dump(ts_instance.buku, file, indent=2)
-                with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json', 'w') as file:
-                    json.dump(data, file, indent=2)
+    # Print the updated dictionary
+    for i, data in ts_instance.buku.items():
+        print(i, data["tersedia"])
 
-                # Print the updated dictionary
-                for i, data in ts_instance.buku.items():
-                    print(i, data["tersedia"])
         while True:
             try:
-                pil = int(input("1 untuk lanjut 0 untuk log out"))
+                pil = int(input("1 untuk lanjut/ 0 untuk logout"))
                 if pil == 1:
                     inti()
-                    return a
                 elif pil == 0:
                     regis()
             except ValueError:
                 print("inputan salah")
-            return a
 
 
 
@@ -170,104 +175,107 @@ def kmb(a):
 def pj(a):
     with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
         data = json.load(file)
-    # Call the function to get an instance of the Tes class
-    ts_instance = ts()
+
+    ts_instance = Tes()  # Creating an instance of the Tes class
+
     usr = username
     now = datetime.datetime.now()
     deadline = now + datetime.timedelta(weeks=1)
-  
-    # Assuming ts_instance.buku is a dictionary where the values represent the quantity of each book
-    if a in ts_instance.buku:
-        if ts_instance.buku[a]["tersedia"] > 0:
-            ts_instance.buku[a]["tersedia"] -= 1
-            # data[usr]['pinjaman'].append(a)
-            data[usr]["pinjaman"].append({
-                "judul_buku": a,
-                # "jumlah": jmlh,
-                "bukti_waktu": now.strftime("%Y/%m/%d"),
-                "deadline" : deadline.strftime("%Y/%m/%d")
+
+    # Split the input by comma and remove leading/trailing whitespaces
+    books_to_borrow = [book.strip() for book in a.split(',')]
+
+    for book in books_to_borrow:
+        if book in ts_instance.buku:
+            if ts_instance.buku[book]["tersedia"] > 0:
+                ts_instance.buku[book]["tersedia"] -= 1
+                stri = generate_unique_id()
+                data[usr]["pinjaman"].append({
+                    "judul_buku": book,
+                    "bukti_waktu": now,
+                    "deadline": deadline,
+                    "kode_struk": stri
                 })
-            print(f"Buku {a} berhasil dipinjam.")
+                print(f"Buku {book} berhasil dipinjam.")
+            else:
+                print(f"Maaf, stok buku {book} habis.")
         else:
-            print(f"Maaf, stok buku {a} habis.")
-    else:
-        print(f"Buku {a} tidak tersedia.")
+            print(f"Buku {book} tidak tersedia.")
 
     # Print the updated dictionary
     for i, jumlah in ts_instance.buku.items():
-         print(f"{i} Tersedia: {jumlah['tersedia']}")
+        print(f"{i} Tersedia: {jumlah['tersedia']}")
 
-    # Update the JSON file
+    # Update the JSON files
     with open('/backup data 2023/optional/belajar python/algo/perpus/data_buku.json', 'w') as file:
-        # Use ts_instance.buku directly to update and write to the file
         json.dump(ts_instance.buku, file, indent=2)
     with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json', 'w') as file:
         json.dump(data, file, indent=2)
+
     ctk()
     while True:
         try:
-            pil = int(input("1 untuk lanjut 0 untuk logout"))
+            pil = int(input("1 untuk lanjut/ 0 untuk logout"))
             if pil == 1:
                 inti()
             elif pil == 0:
                 regis()
         except ValueError:
             print("inputan salah")
-        return a
-
 
 
 
 def ctk():
     with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
         data = json.load(file)
-    
-    panjang = 45
 
-    
-    nama = f"nama peminjam buku : {username}"
-    status = f"status : {data[username]["sebagai"]}"
-    buku = f"Buku yang dipinjam : {data[username]["pinjaman"][0]["judul_buku"]}"
-    nim_nip = f"NIM/NIP{password}"
-    waktu = f"Waktu pinjam : {data[username]["pinjaman"][0]["bukti_waktu"]}"
-    deadline = f"Waktu deadline : {data[username]["pinjaman"][0]["deadline"]}"
-    nm_p = "Perpustakaan Jurusan Teknik Elektro"
-    warning = "*mohon tidak menghilangkan struk ini*"
-    dld = "*melewati deadline dikenakan denda Rp1000/hari*"
+    if username in data:
+        panjang = 45
+        n = len(data[username]["pinjaman"])
 
-    
-    # Cetak struk
-    data = f"""
-    {"=" * panjang}
+        for i in range(n):
+            nama = f"nama peminjam buku : {username}"
+            status = f"status : {data[username]['sebagai']}"
+            buku = f"Buku yang dipinjam : {data[username]['pinjaman'][i]['judul_buku']}"
+            nim_nip = f"NIM/NIP{password}"
+            waktu = f"Waktu pinjam : {data[username]['pinjaman'][i]['bukti_waktu']}"
+            deadline = f"Waktu deadline : {data[username]['pinjaman'][i]['deadline']}"
+            nm_p = "Perpustakaan Jurusan Teknik Elektro"
+            warning = "*mohon tidak menghilangkan struk ini*"
+            dld = "*melewati deadline dikenakan denda Rp1000/hari*"
+            ids = f"kode struk : {data[username]['pinjaman'][i]['kode_struk']}"
 
-    {nama.center(panjang)}
-    {nim_nip.center(panjang)}
-    {buku.center(panjang)}
-    {status.center(panjang)}
-    {waktu.center(panjang)}
-    {deadline.center(panjang)}
-    {nm_p.center(panjang)}
+            info = f"""
+            {"=" * panjang}
 
-    {warning.center(panjang)}
+            {nama.center(panjang)}
+            {status.center(panjang)}
+            {nim_nip.center(panjang)}
+            {buku.center(panjang)}
+            {waktu.center(panjang)}
+            {deadline.center(panjang)}
+            {nm_p.center(panjang)}
 
-    {dld.center(panjang)}
-    
-    {"=" * panjang}
-    """
-    
-    print(data)
-    
-    
-    with open(username, "w") as f:
-        f.write(data)
+            {warning.center(panjang)}
 
-    ntpd = f"{username}"
+            {dld.center(panjang)}
 
-    subprocess.run(["notepad.exe", ntpd])
+            {ids.center(panjang)}
 
-    
-    time.sleep(2)
-    os.remove(ntpd)
+            {"=" * panjang}
+            """
+
+            print(info)
+
+            with open(f"{username}-{i}.txt", "w") as f:
+                f.write(info)
+
+            subprocess.Popen(["notepad.exe", f"{username}-{i}.txt"])
+
+            time.sleep(2)
+            os.remove(f"{username}-{i}.txt")
+    else:
+        print(f"User {username} tidak ditemukan.")
 
 
 regis()

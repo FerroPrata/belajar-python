@@ -17,5 +17,3 @@ def print_buku_by_kategori():
     else:
         print("Maaf, kategori buku '{inp_kategori}' yang Anda masukkan tidak tersedia.")
 
-# Contoh pemanggilan fungsi print_buku_by_kategori
-print_buku_by_kategori()

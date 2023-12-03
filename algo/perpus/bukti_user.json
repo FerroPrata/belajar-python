@@ -1,24 +1,12 @@
 {
   "fadil": {
     "nama": "fadil",
-    "pinjaman": [
-      {
-        "judul_buku": "laskar pelangi",
-        "bukti_waktu": "2023/12/02",
-        "deadline": "2023/12/09"
-      }
-    ],
+    "pinjaman": [],
     "sebagai": "dosen"
   },
   "hafidz": {
     "nama": "hafidz",
-    "pinjaman": [
-      {
-        "judul_buku": "laskar pelangi",
-        "bukti_waktu": "2023/12/02",
-        "deadline": "2023/12/09"
-      }
-    ],
+    "pinjaman": [],
     "sebagai": "tamu"
   }
 }
