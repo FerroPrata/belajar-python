@@ -31,6 +31,14 @@ class Tes:
         hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if buku_info.get("kategori") == kategori}
         return hasil_filter
     
+    def filter_buku_by_tahun(self, tahun):
+        hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if buku_info.get("tahun_terbit") == tahun}
+        return hasil_filter
+    
+    def filter_buku_by_nama_p(self, nama_p):
+      hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if buku_info.get("Penulis") == nama_p}
+      return hasil_filter
+        
 
 def tes():
     return Tes()

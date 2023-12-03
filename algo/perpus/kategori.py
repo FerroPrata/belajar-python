@@ -17,3 +17,51 @@ def print_buku_by_kategori():
     else:
         print("Maaf, kategori buku '{inp_kategori}' yang Anda masukkan tidak tersedia.")
 
+
+def print_buku_by_tahun():
+    ts_instance = Tes()
+    kategori_list = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+    inp_tahun = int(input("Masukkan tahun buku: "))
+
+    if inp_tahun in kategori_list:
+        hasil_filter = ts_instance.filter_buku_by_tahun(inp_tahun)
+
+        if hasil_filter:
+            print(f"\nBuku dengan tahun '{inp_tahun}':")
+            for judul, buku_info in hasil_filter.items():
+                print(f"Judul: {judul}, Tersedia: {buku_info['tersedia']}")
+        else:
+            print("Tidak ditemukan buku di tahun tersebut.")
+    else:
+        print("Maaf, tahun buku '{inp_tahun}' yang Anda masukkan tidak tersedia.")
+
+
+
+def print_buku_by_nama():
+  ts_instance = Tes()
+  nama_pe = (input("Masukkan nama penulis buku: "))
+
+  hasil_filter = None
+  while True:
+    try:
+      if not nama_pe:
+        print("Maaf, nama tidak dapat ditemukan.")
+        print_buku_by_nama()
+        return nama_pe
+      else:
+        hasil_filter = ts_instance.filter_buku_by_nama_p(nama_pe)
+        if hasil_filter:
+            print(f"\nPenulis Buku dengan nama '{nama_pe}':")
+            for judul, buku_info in hasil_filter.items():
+                print(f"Judul: {judul} \nTersedia: {buku_info['tersedia']}\n")
+            print_buku_by_nama()
+        else:
+          print("Penulis buku tidak ditemukan.")
+          print_buku_by_nama()
+    except ValueError:
+      print("Input salah")   
+    return nama_pe
+        
+        
+
+

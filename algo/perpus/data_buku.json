@@ -3,7 +3,7 @@
     "total": 30,
     "tersedia": 11,
     "kategori": "Fiksi",
-    "tahun_terbit": "2020",
+    "tahun_terbit": 2020,
     "Penulis": "ryan",
     "Penerbit": "sinar dunia",
     "jumlah_halaman": "120"
@@ -16,5 +16,14 @@
     "Penulis": "adit",
     "Penerbit": "sinar dunia",
     "jumlah_halaman": 405
+  },
+  "atomic habit": {
+    "total": 20,
+    "tersedia": 20,
+    "kategori": "Non-Fiksi",
+    "tahun_terbit": 2017,
+    "Penulis": "saya",
+    "Penerbit": "sinar dunia",
+    "jumlah_halaman": 145
   }
 }

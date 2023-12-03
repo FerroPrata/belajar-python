@@ -1,11 +1,10 @@
 import datetime
 import subprocess
 import os
-import getpass
 import msvcrt
 import time
 from kategori import *
-from tes import *
+from random_char import *
 
 
 
@@ -87,9 +86,10 @@ def regis():
     return username
 
 def inti():
+    ts_instance = Tes()
     global bc
     global bb
-    pilihan = int(input("Apakah anda ingin |(1) meminjam buku | (2) mengembalikan buku | (3) melihat kategori| : buku(1/2/3): "))
+    pilihan = int(input("|(1) meminjam buku             |\n|(2) mengembalikan buku        |\n|(3) filter kategori buku      |\n|(4) filter tahun terbit buku  |\n|(5) filter nama penulis buku  |\n|(6) melihat buku              |\n\n pilih(1/2/3/4/5/6): "))
     if pilihan == 1:
         bc = str(input("buku yang di pinjam : "))
         pj(a=bc)
@@ -97,6 +97,14 @@ def inti():
         kmb()
     elif pilihan == 3:
         print_buku_by_kategori()
+    elif pilihan == 4:
+        print_buku_by_tahun()
+    elif pilihan == 5:
+        print_buku_by_nama()
+    elif pilihan == 6:
+        for i, data in ts_instance.buku.items():
+            print(f"\nbuku : {i}:\njumlah tersedia : {data["tersedia"]}\n")
+        inti()
     else:
         print("Pilihan anda tidak ada dipilihan!.")
         inti()
@@ -192,8 +200,8 @@ def pj(a):
                 stri = generate_unique_id()
                 data[usr]["pinjaman"].append({
                     "judul_buku": book,
-                    "bukti_waktu": now,
-                    "deadline": deadline,
+                    "bukti_waktu": now.strftime("%Y/%m/%d"),
+                    "deadline": deadline.strftime("%Y/%m/%d"),
                     "kode_struk": stri
                 })
                 print(f"Buku {book} berhasil dipinjam.")
