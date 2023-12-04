@@ -1,4 +1,4 @@
-from data import Tes 
+from data import Tes
 
 def print_buku_by_kategori():
     ts_instance = Tes()
@@ -7,7 +7,6 @@ def print_buku_by_kategori():
 
     if inp_kategori in kategori_list:
         hasil_filter = ts_instance.filter_buku_by_kategori(inp_kategori)
-
         if hasil_filter:
             print(f"\nBuku dengan kategori '{inp_kategori}':")
             for judul, buku_info in hasil_filter.items():
@@ -16,8 +15,20 @@ def print_buku_by_kategori():
             print("Tidak ada buku dengan kategori tersebut.")
     else:
         print("Maaf, kategori buku '{inp_kategori}' yang Anda masukkan tidak tersedia.")
-
-
+    while True:
+            pilihan = input("1. Untuk Mencari lagi 2. Untuk Logout\nPilihan: ")
+            if pilihan == '1':
+                print_buku_by_kategori()
+                break
+            elif pilihan == '2':
+                print("Logout")
+                return
+            else:
+                print("Pilihan tidak valid. Silakan pilih 1 atau 2.")
+            
+        
+        
+        
 def print_buku_by_tahun():
     ts_instance = Tes()
     kategori_list = [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
@@ -34,34 +45,47 @@ def print_buku_by_tahun():
             print("Tidak ditemukan buku di tahun tersebut.")
     else:
         print("Maaf, tahun buku '{inp_tahun}' yang Anda masukkan tidak tersedia.")
+    while True:
+        pilihan = input("1. Untuk Mencari lagi 2. Untuk Logout\nPilihan: ")
+        if pilihan == '1':
+            print_buku_by_tahun()
+            break
+        elif pilihan == '2':
+            print("Logout")
+            return
+        else:
+            print("Pilihan tidak valid. Silakan pilih 1 atau 2.")
 
 
 
 def print_buku_by_nama():
-  ts_instance = Tes()
-  nama_pe = (input("Masukkan nama penulis buku: "))
+    ts_instance = Tes()
+    nama_pe = (input("Masukkan nama penulis buku: "))
 
-  hasil_filter = None
-  while True:
-    try:
-      if not nama_pe:
+    hasil_filter = None
+
+    if not nama_pe:
         print("Maaf, nama tidak dapat ditemukan.")
         print_buku_by_nama()
         return nama_pe
-      else:
+    else:
         hasil_filter = ts_instance.filter_buku_by_nama_p(nama_pe)
         if hasil_filter:
             print(f"\nPenulis Buku dengan nama '{nama_pe}':")
             for judul, buku_info in hasil_filter.items():
                 print(f"Judul: {judul} \nTersedia: {buku_info['tersedia']}\n")
-            print_buku_by_nama()
         else:
           print("Penulis buku tidak ditemukan.")
-          print_buku_by_nama()
-    except ValueError:
-      print("Input salah")   
-    return nama_pe
-        
-        
 
-
+    while True:
+        try:
+            pilihan = input("1. Untuk Mencari lagi 2. Untuk Logout\nPilihan: ")
+            if pilihan == '1':
+                print_buku_by_nama()
+            elif pilihan == '2':
+                print("Logout")
+                break
+            else:
+                print("Pilihan tidak valid. Silakan pilih 1 atau 2.")
+        except ValueError:
+            print("Input salah. Masukkan angka 1 atau 2.")
