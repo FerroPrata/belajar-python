@@ -5,12 +5,15 @@ import msvcrt
 import time
 from kategori import *
 from random_char import *
+from p_pinjam import *
+from penambahan import *
 
 
 
-login_reg = input("Login / Registrasi: ")
+
 panjang = 45
 def regis():
+    login_reg = input("Login / Registrasi: ")
     global sbg
     global password
     global username
@@ -18,19 +21,41 @@ def regis():
         if login_reg == "login" or login_reg == "Login":
             break
         else:
-            tp = ["dosen", "mahasiswa", "tamu"]
             username = input("Masukkan Nama : ")
-            password = input("Masukkan NIM/NIP : ")
             while True:
                 try:
-                    sbg = input("status dosen/mahasiswa/tamu: ")
-                    if sbg in tp:
-                        break
-                    else:
-                        ("status tidak tersedia")
-                except ValueError:
-                    print("status tidak tersedia")
+                    password = input("Masukkan NIM/NIP: ")
+                    if password.isdigit():
+                        password = int(password)
 
+                        tahun = [1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+                        bulan = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                        tanggal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+
+                        # Memisahkan tahun, bulan, dan tanggal dari NIM/NIP
+                        tahun_nip = int(str(password)[:14])
+                        bulan_nip = (password % 10000) // 100
+                        tanggal_nip = password % 100
+
+                        if len(str(password)) == 10:
+                            sbg = "mahasiswa"
+                            break
+                        elif len(str(password)) >= 18:
+                            # Menambahkan kondisi untuk memastikan enam digit pertama adalah tahun, bulan, dan tanggal yang valid
+                            if tahun_nip >= tahun[0] and bulan_nip in bulan and tanggal_nip in tanggal:
+                                sbg = "dosen"
+                                break
+                            else:
+                                print("salah")
+                        elif len(str(password)) < 10:
+                            sbg = "tamu"
+                            break
+                        else:
+                            print("Format NIM/NIP tidak valid.")
+                    else:
+                        print("NIM/NIP harus berupa angka.")
+                except ValueError:
+                    print("NIM/NIP tidak tersedia")
             print("Masukkan PIN:", end='', flush=True)#perubahan
             pin = ""
             while True:
@@ -59,9 +84,12 @@ def regis():
     max_attempts = 3
     attempts = 0
     print("Program Login Perpustakaan".center(panjang))
-
     with open("user_data.txt", "r") as file:
         lines = file.readlines()
+    
+    admin_username = "admin"
+    admin_password = "admin"
+    kode = "admin"
 
     while attempts < max_attempts:
         username = input("Masukan Nama : ")
@@ -74,22 +102,28 @@ def regis():
                 break
             pin += char
             print('*', end='', flush=True)
-        if any(line.strip() == f"{username},{password},{pin}" for line in lines):
-            print()
-            print("Login berhasil!")
-            inti()
+        if username == admin_username and password == admin_password and pin == kode:
+            print("\nHak istimewa admin diberikan.")
+            # Add your admin privileges or functions here
+            admin()
         else:
-            print("Login gagal. Coba lagi.")
-            attempts += 1
-            if attempts == max_attempts:
-                print("Anda telah melebihi batas percobaan login.")
+            if any(line.strip() == f"{username},{password},{pin}" for line in lines):
+                print()
+                print("Login berhasil!")
+                inti()
+            else:
+                print("Login gagal. Coba lagi.")
+                attempts += 1
+                if attempts == max_attempts:
+                    print("Anda telah melebihi batas percobaan login.")
     return username
+
 
 def inti():
     ts_instance = Tes()
     global bc
     global bb
-    pilihan = int(input("|(1) meminjam buku             |\n|(2) mengembalikan buku        |\n|(3) filter kategori buku      |\n|(4) filter tahun terbit buku  |\n|(5) filter nama penulis buku  |\n|(6) melihat buku              |\n\n pilih(1/2/3/4/5/6): "))
+    pilihan = int(input("|(1) meminjam buku             |\n|(2) mengembalikan buku        |\n|(3) filter kategori buku      |\n|(4) filter tahun terbit buku  |\n|(5) filter nama penulis buku  |\n|(6) melihat buku              |\n|(0) Logout                    |\n\n pilih(1/2/3/4/5/6/0): "))
     if pilihan == 1:
         bc = str(input("buku yang di pinjam : "))
         pj(a=bc)
@@ -97,19 +131,48 @@ def inti():
         kmb()
     elif pilihan == 3:
         print_buku_by_kategori()
+        inti()
     elif pilihan == 4:
         print_buku_by_tahun()
+        inti()
     elif pilihan == 5:
         print_buku_by_nama()
+        inti()
     elif pilihan == 6:
         for i, data in ts_instance.buku.items():
             print(f"\nbuku : {i}:\njumlah tersedia : {data["tersedia"]}\n")
         inti()
+    elif pilihan == 0:
+        regis()
+        return
     else:
         print("Pilihan anda tidak ada dipilihan!.")
         inti()
 import json
 from data import tes as ts
+
+
+def admin():
+    ts_instance = Tes()
+    global bc
+    global bb
+    pilihan = int(input("\n|(1) pendataan buku             |\n|(2) pemantauan user            |\n|(3) pemantauan pinjaman        |\n|(0) Logout                     |\n\n pilih(1/2/3/0): "))
+    if pilihan == 1:
+        tambah_buku()
+        admin()
+    elif pilihan == 2:
+        cek_g()
+        admin()
+    elif pilihan == 3:
+        cek_b()
+        admin()
+    elif pilihan == 0:
+        regis()
+        return
+    else:
+        print("Pilihan anda tidak ada dipilihan!.")
+        inti()
+
 
 
 

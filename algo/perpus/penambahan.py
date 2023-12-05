@@ -45,5 +45,4 @@ def tambah_buku():
     ts_instance.tambah_buku(judul, total, kategori, thn_terbit, penulis, penerbit, jumlah_hal)
     ts_instance.save_to_file()
 
-tambah_buku()
 

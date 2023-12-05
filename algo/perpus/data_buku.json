@@ -1,7 +1,7 @@
 {
   "hari pot": {
     "total": 30,
-    "tersedia": 11,
+    "tersedia": 9,
     "kategori": "Fiksi",
     "tahun_terbit": 2020,
     "Penulis": "ryan",
@@ -10,7 +10,7 @@
   },
   "laskar pelangi": {
     "total": 20,
-    "tersedia": 3,
+    "tersedia": 0,
     "kategori": "Komedi",
     "tahun_terbit": 2013,
     "Penulis": "adit",
@@ -25,5 +25,14 @@
     "Penulis": "saya",
     "Penerbit": "sinar dunia",
     "jumlah_halaman": 145
+  },
+  "guide python": {
+    "total": 63,
+    "tersedia": 63,
+    "kategori": "Sains",
+    "tahun_terbit": 2015,
+    "Penulis": "abdul",
+    "Penerbit": "sinar dunia",
+    "jumlah_halaman": 305
   }
 }
