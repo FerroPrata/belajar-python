@@ -1,20 +1,7 @@
 {
   "fadil": {
     "nama": "fadil",
-    "pinjaman": [
-      {
-        "judul_buku": "laskar pelangi",
-        "bukti_waktu": "2023/12/05",
-        "deadline": "2023/12/12",
-        "kode_struk": "r26qUzqH"
-      },
-      {
-        "judul_buku": "hari pot",
-        "bukti_waktu": "2023/12/05",
-        "deadline": "2023/12/12",
-        "kode_struk": "r2Wpw27V"
-      }
-    ],
+    "pinjaman": [],
     "sebagai": "dosen"
   },
   "hafidz": {
@@ -24,32 +11,12 @@
   },
   "adit": {
     "nama": "adit",
-    "pinjaman": [
-      {
-        "judul_buku": "laskar pelangi",
-        "bukti_waktu": "2023/12/05",
-        "deadline": "2023/12/12",
-        "kode_struk": "oOi0zaeC"
-      },
-      {
-        "judul_buku": "hari pot",
-        "bukti_waktu": "2023/12/05",
-        "deadline": "2023/12/12",
-        "kode_struk": "EVEcQt5U"
-      }
-    ],
+    "pinjaman": [],
     "sebagai": "dosen"
   },
   "mulfis": {
     "nama": "mulfis",
-    "pinjaman": [
-      {
-        "judul_buku": "laskar pelangi",
-        "bukti_waktu": "2023/12/05",
-        "deadline": "2023/12/12",
-        "kode_struk": "4sd5FFkP"
-      }
-    ],
+    "pinjaman": [],
     "sebagai": "mahasiswa"
   },
   "suharsono": {
@@ -61,5 +28,17 @@
     "nama": "dnoirz",
     "pinjaman": [],
     "sebagai": "dosen"
+  },
+  "sena": {
+    "nama": "sena",
+    "pinjaman": [
+      {
+        "judul_buku": "Dokter Umum Komputer",
+        "bukti_waktu": "2023/12/07",
+        "deadline": "2023/12/14",
+        "kode_struk": "EGykwRZu"
+      }
+    ],
+    "sebagai": "mahasiswa"
   }
 }

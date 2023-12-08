@@ -1,7 +1,7 @@
 {
   "hari pot": {
     "total": 30,
-    "tersedia": 9,
+    "tersedia": 11,
     "kategori": "Fiksi",
     "tahun_terbit": 2020,
     "Penulis": "ryan",
@@ -10,7 +10,7 @@
   },
   "laskar pelangi": {
     "total": 20,
-    "tersedia": 0,
+    "tersedia": 3,
     "kategori": "Komedi",
     "tahun_terbit": 2013,
     "Penulis": "adit",
@@ -34,5 +34,14 @@
     "Penulis": "abdul",
     "Penerbit": "sinar dunia",
     "jumlah_halaman": 305
+  },
+  "Dokter Umum Komputer": {
+    "total": 1,
+    "tersedia": 0,
+    "kategori": "Non-Fiksi",
+    "tahun_terbit": 2022,
+    "Penulis": "M. Bima Sena",
+    "Penerbit": "Jejak Kata",
+    "jumlah_halaman": 111
   }
 }

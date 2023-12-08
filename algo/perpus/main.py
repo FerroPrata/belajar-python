@@ -7,10 +7,11 @@ from kategori import *
 from random_char import *
 from p_pinjam import *
 from penambahan import *
+from hapus import *
 
 
 
-
+# login dan register 
 panjang = 45
 def regis():
     login_reg = input("Login / Registrasi: ")
@@ -40,7 +41,7 @@ def regis():
                         if len(str(password)) == 10:
                             sbg = "mahasiswa"
                             break
-                        elif len(str(password)) >= 18:
+                        elif len(str(password)) >= 18 and len(str(password)) <= 19:
                             # Menambahkan kondisi untuk memastikan enam digit pertama adalah tahun, bulan, dan tanggal yang valid
                             if tahun_nip >= tahun[0] and bulan_nip in bulan and tanggal_nip in tanggal:
                                 sbg = "dosen"
@@ -104,12 +105,12 @@ def regis():
             print('*', end='', flush=True)
         if username == admin_username and password == admin_password and pin == kode:
             print("\nHak istimewa admin diberikan.")
-            # Add your admin privileges or functions here
             admin()
         else:
             if any(line.strip() == f"{username},{password},{pin}" for line in lines):
                 print()
-                print("Login berhasil!")
+                print(f"\n        Login berhasil")
+                print(f"    Selamat Datang {username}!\n")
                 inti()
             else:
                 print("Login gagal. Coba lagi.")
@@ -118,7 +119,7 @@ def regis():
                     print("Anda telah melebihi batas percobaan login.")
     return username
 
-
+# main menu 
 def inti():
     ts_instance = Tes()
     global bc
@@ -152,11 +153,12 @@ import json
 from data import tes as ts
 
 
+# hak istimewa admin 
 def admin():
     ts_instance = Tes()
     global bc
     global bb
-    pilihan = int(input("\n|(1) pendataan buku             |\n|(2) pemantauan user            |\n|(3) pemantauan pinjaman        |\n|(0) Logout                     |\n\n pilih(1/2/3/0): "))
+    pilihan = int(input("\n|(1) pendataan buku             |\n|(2) pemantauan user            |\n|(3) pemantauan pinjaman        |\n|(4) penghapusan buku           |\n|(0) Logout                     |\n pilih(1/2/3/4/0): "))
     if pilihan == 1:
         tambah_buku()
         admin()
@@ -166,6 +168,9 @@ def admin():
     elif pilihan == 3:
         cek_b()
         admin()
+    elif pilihan == 4:
+        hapus_buku_dan_pinjaman()
+        admin()
     elif pilihan == 0:
         regis()
         return
@@ -174,7 +179,7 @@ def admin():
         inti()
 
 
-
+# fungsi pengembalian
 
 def kmb():
     with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
@@ -241,19 +246,19 @@ def kmb():
 
 
 
-# from member import regis, username
+# fungsi peminjaman buku 
 
 def pj(a):
     with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
         data = json.load(file)
 
-    ts_instance = Tes()  # Creating an instance of the Tes class
+    ts_instance = Tes()  
 
     usr = username
     now = datetime.datetime.now()
     deadline = now + datetime.timedelta(weeks=1)
 
-    # Split the input by comma and remove leading/trailing whitespaces
+
     books_to_borrow = [book.strip() for book in a.split(',')]
 
     for book in books_to_borrow:
@@ -273,11 +278,9 @@ def pj(a):
         else:
             print(f"Buku {book} tidak tersedia.")
 
-    # Print the updated dictionary
     for i, jumlah in ts_instance.buku.items():
         print(f"{i} Tersedia: {jumlah['tersedia']}")
 
-    # Update the JSON files
     with open('/backup data 2023/optional/belajar python/algo/perpus/data_buku.json', 'w') as file:
         json.dump(ts_instance.buku, file, indent=2)
     with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json', 'w') as file:
