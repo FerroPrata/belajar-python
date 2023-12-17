@@ -3,6 +3,7 @@ from data import Tes
 def tambah_buku():
     kt = "Fiksi", "Non-Fiksi", "Sains", "Komedi"
     ts_instance = Tes()
+    #kode = input("Kode untuk buku:\n A = Fiksi\n B = Non-Fiksi\n C = Sains\n D = Komedi\n Masukkan kode buku:")
     judul = input("Masukkan judul buku: ")
     while True:
         try:
@@ -42,7 +43,6 @@ def tambah_buku():
                 break
         except ValueError:
                     print("masukan angka")
-    ts_instance.tambah_buku(judul, total, kategori, thn_terbit, penulis, penerbit, jumlah_hal)
+    #ts_instance.tambah_buku(kode, judul, total, kategori, thn_terbit, penulis, penerbit, jumlah_hal)
     ts_instance.save_to_file()
-
 
