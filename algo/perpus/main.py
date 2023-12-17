@@ -67,7 +67,7 @@ def regis():
                 print('*', end='', flush=True)
             with open("user_data.txt", "a") as file:
                 file.write(f"{username},{password},{pin}\n")
-            with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
+            with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\bukti_user.json') as file:
                 try:
                     data = json.load(file)
                 except json.decoder.JSONDecodeError:
@@ -76,7 +76,7 @@ def regis():
                 usr = username
                 new_user = {"nama": str(usr), "pinjaman": [], "sebagai": str(sbg)}
                 data.update({str(usr): new_user})
-            with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json', 'w') as file:
+            with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\bukti_user.json', 'w') as file:
                 json.dump(data, file, indent=2)
             print('')
             print("Data telah disimpan dalam Database")
@@ -126,7 +126,7 @@ def inti():
     global bb
     pilihan = int(input("|(1) meminjam buku             |\n|(2) mengembalikan buku        |\n|(3) filter kategori buku      |\n|(4) filter tahun terbit buku  |\n|(5) filter nama penulis buku  |\n|(6) melihat buku              |\n|(0) Logout                    |\n\n pilih(1/2/3/4/5/6/0): "))
     if pilihan == 1:
-        bc = str(input("buku yang di pinjam : "))
+        bc = str(input("Masukkan kode buku yang di pinjam : "))
         pj(a=bc)
     elif pilihan == 2:
         kmb()
@@ -141,7 +141,7 @@ def inti():
         inti()
     elif pilihan == 6:
         for i, data in ts_instance.buku.items():
-            print(f"\nbuku : {i}:\njumlah tersedia : {data["tersedia"]}\n")
+            print(f"\nbuku : {i}\nkode buku : {data["kode"]}\njumlah tersedia : {data["tersedia"]}\n")
         inti()
     elif pilihan == 0:
         regis()
@@ -182,7 +182,7 @@ def admin():
 # fungsi pengembalian
 
 def kmb():
-    with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
+    with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\bukti_user.json') as file:
         data = json.load(file)
 
     kode_struk_input = input("Masukkan kode struk : ")
@@ -223,13 +223,11 @@ def kmb():
                 else:
                     print(f"Buku {judul_buku} tidak valid atau tidak sedang dipinjam.")
 
-    with open('/backup data 2023/optional/belajar python/algo/perpus/data_buku.json', 'w') as file:
+    with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\data_buku.json', 'w') as file:
         json.dump(ts_instance.buku, file, indent=2)
 
-    with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json', 'w') as file:
+    with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\bukti_user.json', 'w') as file:
         json.dump(data, file, indent=2)
-
-    # Print the updated dictionary
     for i, data in ts_instance.buku.items():
         print(i, data["tersedia"])
 
@@ -248,59 +246,59 @@ def kmb():
 
 # fungsi peminjaman buku 
 
-def pj(a):
-    with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
-        data = json.load(file)
+# def pj(a):
+#     with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\bukti_user.json') as file:
+#         data = json.load(file)
 
-    ts_instance = Tes()  
+#     ts_instance = Tes()  
 
-    usr = username
-    now = datetime.datetime.now()
-    deadline = now + datetime.timedelta(weeks=1)
+#     usr = username
+#     now = datetime.datetime.now()
+#     deadline = now + datetime.timedelta(weeks=1)
 
+#     kode_buku_dipinjam = [kode.strip() for kode in a.split(',')]
 
-    books_to_borrow = [book.strip() for book in a.split(',')]
+#     for kode in kode_buku_dipinjam:
+#         buku = next((judul for judul, info in ts_instance.buku.items() if info["kode"] == kode), None)
 
-    for book in books_to_borrow:
-        if book in ts_instance.buku:
-            if ts_instance.buku[book]["tersedia"] > 0:
-                ts_instance.buku[book]["tersedia"] -= 1
-                stri = generate_unique_id()
-                data[usr]["pinjaman"].append({
-                    "judul_buku": book,
-                    "bukti_waktu": now.strftime("%Y/%m/%d"),
-                    "deadline": deadline.strftime("%Y/%m/%d"),
-                    "kode_struk": stri
-                })
-                print(f"Buku {book} berhasil dipinjam.")
-            else:
-                print(f"Maaf, stok buku {book} habis.")
-        else:
-            print(f"Buku {book} tidak tersedia.")
+#         if buku and ts_instance.buku[buku]["tersedia"] > 0:
+#             ts_instance.buku[buku]["tersedia"] -= 1
+#             stri = generate_unique_id()
+#             data[usr]["pinjaman"].append({
+#                 "judul_buku": buku,
+#                 "bukti_waktu": now.strftime("%Y/%m/%d5"),
+#                 "deadline": deadline.strftime("%Y/%m/%d"),
+#                 "kode_struk": stri
+#             })
+#             print(f"Buku dengan kode {kode} berhasil dipinjam.")
+#         elif buku:
+#             print(f"Maaf, stok buku dengan kode {kode} habis.")
+#         else:
+#             print(f"Buku dengan kode {kode} tidak tersedia.")
 
-    for i, jumlah in ts_instance.buku.items():
-        print(f"{i} Tersedia: {jumlah['tersedia']}")
+#     for i, jumlah in ts_instance.buku.items():
+#         print(f"{i} Tersedia: {jumlah['tersedia']}")
 
-    with open('/backup data 2023/optional/belajar python/algo/perpus/data_buku.json', 'w') as file:
-        json.dump(ts_instance.buku, file, indent=2)
-    with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json', 'w') as file:
-        json.dump(data, file, indent=2)
+#     with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\data_buku.json', 'w') as file:
+#         json.dump(ts_instance.buku, file, indent=2)
+#     with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\bukti_user.json', 'w') as file:
+#         json.dump(data, file, indent=2)
 
-    ctk()
-    while True:
-        try:
-            pil = int(input("1 untuk lanjut/ 0 untuk logout"))
-            if pil == 1:
-                inti()
-            elif pil == 0:
-                regis()
-        except ValueError:
-            print("inputan salah")
+#     ctk()
+#     while True:
+#         try:
+#             pil = int(input("1 untuk lanjut/ 0 untuk logout"))
+#             if pil == 1:
+#                 inti()
+#             elif pil == 0:
+#                 regis()
+#         except ValueError:
+#             print("inputan salah")
 
 
 
 def ctk():
-    with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
+    with open('\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Project 1\\bukti_user.json') as file:
         data = json.load(file)
 
     if username in data:
