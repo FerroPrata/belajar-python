@@ -4,7 +4,7 @@ def print_buku_by_kategori():
     ts_instance = Tes()
     kategori_list = ["Fiksi", "Non-Fiksi", "Sains", "Komedi"]
     inp_kategori = input("Masukkan kategori buku: ")
-
+    
     if inp_kategori in kategori_list:
         hasil_filter = ts_instance.filter_buku_by_kategori(inp_kategori)
         if hasil_filter:
@@ -60,7 +60,7 @@ def print_buku_by_tahun():
 
 def print_buku_by_nama():
     ts_instance = Tes()
-    nama_pe = (input("Masukkan nama penulis buku: "))
+    nama_pe = (input("Masukkan nama penulis buku: ")).lower() #Menambah Fungsi Lower di inputan 'nama_pe'
 
     hasil_filter = None
 
@@ -71,8 +71,8 @@ def print_buku_by_nama():
     else:
         hasil_filter = ts_instance.filter_buku_by_nama_p(nama_pe)
         if hasil_filter:
-            print(f"\nPenulis Buku dengan nama '{nama_pe}':")
             for judul, buku_info in hasil_filter.items():
+                print(f"\nPenulis Buku dengan nama '{buku_info["Penulis"]}':")
                 print(f"Judul: {judul} \nTersedia: {buku_info['tersedia']}\n")
         else:
           print("Penulis buku tidak ditemukan.")

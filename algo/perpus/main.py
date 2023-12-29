@@ -8,6 +8,8 @@ from random_char import *
 from p_pinjam import *
 from penambahan import *
 from hapus import *
+from prettytable import PrettyTable
+
 
 
 
@@ -126,8 +128,8 @@ def inti():
     global bb
     pilihan = int(input("|(1) meminjam buku             |\n|(2) mengembalikan buku        |\n|(3) filter kategori buku      |\n|(4) filter tahun terbit buku  |\n|(5) filter nama penulis buku  |\n|(6) melihat buku              |\n|(0) Logout                    |\n\n pilih(1/2/3/4/5/6/0): "))
     if pilihan == 1:
-        bc = str(input("buku yang di pinjam : "))
-        pj(a=bc)
+        pj()
+        return a
     elif pilihan == 2:
         kmb()
     elif pilihan == 3:
@@ -140,8 +142,12 @@ def inti():
         print_buku_by_nama()
         inti()
     elif pilihan == 6:
+        table = PrettyTable()
+        table.field_names = ["kode", "buku", "julah tersedia"]
         for i, data in ts_instance.buku.items():
-            print(f"\nbuku : {i}:\njumlah tersedia : {data["tersedia"]}\n")
+            # print(f"\nbuku : {i}:\njumlah tersedia : {data["tersedia"]}\n")
+            table.add_row([data["kode"], i, data["tersedia"]])
+        print(table)
         inti()
     elif pilihan == 0:
         regis()
@@ -218,6 +224,7 @@ def kmb():
                         data[usr]["pinjaman"] = pinjaman_baru
 
                         print(f"Buku {judul_buku} dengan kode struk {b} berhasil dikembalikan.")
+
                     else:
                         print(f"Maaf, stok buku {judul_buku} sudah penuh.")
                 else:
@@ -246,37 +253,37 @@ def kmb():
 
 
 
-# fungsi peminjaman buku 
 
-def pj(a):
+def pj():
+    global a
     with open('/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json') as file:
         data = json.load(file)
 
     ts_instance = Tes()  
-
+    a = str(input("masukan kode buku : "))
     usr = username
     now = datetime.datetime.now()
     deadline = now + datetime.timedelta(weeks=1)
 
+    kode_buku_dipinjam = [kode.strip() for kode in a.split(',')]
 
-    books_to_borrow = [book.strip() for book in a.split(',')]
+    for kode in kode_buku_dipinjam:
+        buku = next((judul for judul, info in ts_instance.buku.items() if info["kode"] == kode), None)
 
-    for book in books_to_borrow:
-        if book in ts_instance.buku:
-            if ts_instance.buku[book]["tersedia"] > 0:
-                ts_instance.buku[book]["tersedia"] -= 1
-                stri = generate_unique_id()
-                data[usr]["pinjaman"].append({
-                    "judul_buku": book,
-                    "bukti_waktu": now.strftime("%Y/%m/%d"),
-                    "deadline": deadline.strftime("%Y/%m/%d"),
-                    "kode_struk": stri
-                })
-                print(f"Buku {book} berhasil dipinjam.")
-            else:
-                print(f"Maaf, stok buku {book} habis.")
+        if buku and ts_instance.buku[buku]["tersedia"] > 0:
+            ts_instance.buku[buku]["tersedia"] -= 1
+            stri = generate_unique_id()
+            data[usr]["pinjaman"].append({
+                "judul_buku": buku,
+                "bukti_waktu": now.strftime("%Y/%m/%d5"),
+                "deadline": deadline.strftime("%Y/%m/%d"),
+                "kode_struk": stri
+            })
+            print(f"Buku dengan kode {kode} berhasil dipinjam.")
+        elif buku:
+            print(f"Maaf, stok buku dengan kode {kode} habis.")
         else:
-            print(f"Buku {book} tidak tersedia.")
+            print(f"Buku dengan kode {kode} tidak tersedia.")
 
     for i, jumlah in ts_instance.buku.items():
         print(f"{i} Tersedia: {jumlah['tersedia']}")
@@ -296,7 +303,11 @@ def pj(a):
                 regis()
         except ValueError:
             print("inputan salah")
+    
+        
 
+
+    
 
 
 def ctk():
@@ -350,6 +361,7 @@ def ctk():
             os.remove(f"{username}-{i}.txt")
     else:
         print(f"User {username} tidak ditemukan.")
+    return
 
 
 regis()

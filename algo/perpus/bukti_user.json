@@ -31,14 +31,22 @@
   },
   "sena": {
     "nama": "sena",
-    "pinjaman": [
-      {
-        "judul_buku": "Dokter Umum Komputer",
-        "bukti_waktu": "2023/12/07",
-        "deadline": "2023/12/14",
-        "kode_struk": "EGykwRZu"
-      }
-    ],
+    "pinjaman": [],
     "sebagai": "mahasiswa"
+  },
+  "123": {
+    "nama": "123",
+    "pinjaman": [],
+    "sebagai": "tamu"
+  },
+  "riki": {
+    "nama": "riki",
+    "pinjaman": [],
+    "sebagai": "dosen"
+  },
+  "oki": {
+    "nama": "oki",
+    "pinjaman": [],
+    "sebagai": "tamu"
   }
 }

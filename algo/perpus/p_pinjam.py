@@ -1,26 +1,25 @@
 import json
+import prettytable
 
 def cek_g():    
     with open("/backup data 2023/optional/belajar python/algo/perpus/bukti_user.json", "r") as f:
         data = json.load(f)
-    # Mengeprint semua data
-    for user in data.values():
-        print("Nama:", user["nama"])
-        print("Status:", user["sebagai"])
-        if user["pinjaman"]:
-            print("sedang meminjam : ", end="")
-            for pinjaman in user["pinjaman"]:
-                print(f"\'{pinjaman["judul_buku"]}\'",end=" ")
-            print("\n")
 
-        else:
-            print("sedang tidak meminjam buku apapun")
-            print()
+    tabel = prettytable.PrettyTable()
+    tabel.field_names = ["Nama", "Status", "Judul buku", "Bukti waktu", "Deadline", "Kode struk"]
+
+    for nama, detail in data.items():
+        if detail["pinjaman"]:
+            pinjaman = detail["pinjaman"][0]
+            tabel.add_row([nama, detail["sebagai"], pinjaman["judul_buku"], pinjaman["bukti_waktu"], pinjaman["deadline"], pinjaman["kode_struk"]])
+
+
+    print(tabel)
 
     while True:
         pilihan = input("\n1. Untuk Mencari lagi 2. Untuk kembali\nPilihan: ")
         if pilihan == '1':
-            cek_g
+            cek_g()
         elif pilihan == '2':
             print("kembali")
             break

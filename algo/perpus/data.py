@@ -20,9 +20,9 @@ class Tes:
         with open(file_path, 'w') as file:
             json.dump(self.buku, file, indent=2)
 
-    def tambah_buku(self, judul, total, kategori, thn_terbit, penulis, penerbit, jumlah_hal):
+    def tambah_buku(self, kode , judul, total, kategori, thn_terbit, penulis, penerbit, jumlah_hal):
         if judul not in self.buku:
-            self.buku[judul] = {"total": total, "tersedia": total, "kategori": kategori, "tahun_terbit": thn_terbit, "Penulis": penulis, "Penerbit": penerbit, "jumlah_halaman": jumlah_hal }
+            self.buku[judul] = {"kode": kode, "total": total, "tersedia": total, "kategori": kategori, "tahun_terbit": thn_terbit, "Penulis": penulis, "Penerbit": penerbit, "jumlah_halaman": jumlah_hal }
             print(f"Buku {judul} berhasil ditambahkan.")
         else:
             print(f"Buku dengan judul {judul} sudah ada.")
@@ -36,8 +36,9 @@ class Tes:
         return hasil_filter
     
     def filter_buku_by_nama_p(self, nama_p):
-      hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if buku_info.get("Penulis") == nama_p}
-      return hasil_filter
+        nama_p = nama_p.lower() #Ubah input menggunakan lower
+        hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if nama_p in buku_info.get("Penulis").lower()} #Menggunakan fungsi in pada buku_info.get dan menambah fungsi lower diakhir
+        return hasil_filter
         
 
 def tes():

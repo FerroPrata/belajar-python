@@ -1,47 +1,22 @@
 {
-  "hari pot": {
-    "total": 30,
-    "tersedia": 11,
+  "guide keren": {
+    "kode": "A10",
+    "total": 20,
+    "tersedia": 20,
     "kategori": "Fiksi",
     "tahun_terbit": 2020,
-    "Penulis": "ryan",
-    "Penerbit": "sinar dunia",
-    "jumlah_halaman": "120"
+    "Penulis": "fadil",
+    "Penerbit": "siaran",
+    "jumlah_halaman": 210
   },
-  "laskar pelangi": {
-    "total": 20,
-    "tersedia": 3,
-    "kategori": "Komedi",
-    "tahun_terbit": 2013,
-    "Penulis": "adit",
-    "Penerbit": "sinar dunia",
-    "jumlah_halaman": 405
-  },
-  "atomic habit": {
+  "Dokter Komputer": {
+    "kode": "B210",
     "total": 20,
     "tersedia": 20,
     "kategori": "Non-Fiksi",
     "tahun_terbit": 2017,
-    "Penulis": "saya",
-    "Penerbit": "sinar dunia",
-    "jumlah_halaman": 145
-  },
-  "guide python": {
-    "total": 63,
-    "tersedia": 63,
-    "kategori": "Sains",
-    "tahun_terbit": 2015,
-    "Penulis": "abdul",
-    "Penerbit": "sinar dunia",
-    "jumlah_halaman": 305
-  },
-  "Dokter Umum Komputer": {
-    "total": 1,
-    "tersedia": 0,
-    "kategori": "Non-Fiksi",
-    "tahun_terbit": 2022,
     "Penulis": "M. Bima Sena",
-    "Penerbit": "Jejak Kata",
-    "jumlah_halaman": 111
+    "Penerbit": "Sinar Dunia",
+    "jumlah_halaman": 345
   }
 }
