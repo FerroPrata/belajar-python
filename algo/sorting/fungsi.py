@@ -21,9 +21,9 @@ class Tes:
         with open(file_path, 'w') as file:
             json.dump(self.buku, file, indent=2)
 
-    def tambah_warung(self, alamat, warung, no):
+    def tambah_warung(self, warung, alamat, no, rating, jarak, rekomendasi, jam_buka, jam_tutup):
         if warung not in self.buku:
-            self.buku[warung] = {"alamat": alamat, "no": no}
+            self.buku[warung] = {"alamat": alamat, "no": no, "rating": rating, "jarak": jarak, "rekomendasi" : rekomendasi, "jam buka" : jam_buka, "jam tutup" : jam_tutup}
             print(f"{warung} berhasil ditambahkan.")
         else:
             print(f"Buku dengan warung {warung} sudah ada.")
