@@ -1,3 +1,9 @@
-from patch1 import *
+from coba import *
 
-print(tabel)
+
+a = int(input("input"))
+
+if a == 1:
+    warung_sorting()
+else:
+    print("tidak ada")

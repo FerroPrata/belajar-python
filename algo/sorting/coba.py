@@ -1,39 +1,57 @@
 import json
 import time
-import random
+from prettytable import PrettyTable
+import datetime
 
+def format_time(time_str):
+    return datetime.datetime.strptime(time_str, "%H:%M").replace(tzinfo=datetime.timezone.utc).time()
 
-with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
+def get_status(jam_buka, jam_tutup, now):
+    jam_buka = format_time(jam_buka)
+    jam_tutup = format_time(jam_tutup)
+    if jam_buka <= now <= jam_tutup:
+        return "buka"
+    else:
+        return "tutup"
+
+def warung_sorting():
+    with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
         dataa = json.load(f)
 
-hasil = list(dataa.keys())
+    now = datetime.datetime.now().time()
+    data = list(dataa.items())
 
-tahun_terbit_list = [buku["tahun_terbit"] for buku in dataa.values()]
-
-
-print(tahun_terbit_list)
-
-
-data = tahun_terbit_list
-def insertion_sort(data):
     a = 0
     waktuM = time.time()
-    for i in range(1, len(data)): # perulangan pertama
-        key_item = data[i] # ini elemen yang akan kita posisikan
-        j = i - 1 # kunci index posisi
-        while j >= 0 and data[j] > key_item: # lakukan perulangan kedua
-            data[j + 1] = data[j] # menggeser elemen yang lain
+    for i in range(1, len(data)):
+        key_item = data[i]
+        j = i - 1
+        while j >= 0 and data[j][1]["rating"] < key_item[1]["rating"]:
+            data[j + 1] = data[j]
             j -= 1
-            data[j + 1] = key_item # memposisikan elemen
-            print(f"step ke-{a} : {data}, iterasi ke-{i}")
-            a += 1
+        data[j + 1] = key_item
+        print(f"step ke-{a} : {[buku[1]['rating'] for buku in data]}, iterasi ke-{i}")
+        a += 1
 
     waktuS = time.time()
     waktuA = waktuS - waktuM
-    print(f'Waktu : {waktuA:.6f}' )
+    print(f'Waktu : {waktuA:.6f}')
 
-    return data
+    print("\nWarung sebelum di sorting")
+    tabel = list(zip(dataa.keys(), [buku["rating"] for buku in dataa.values()]))
 
-print("Hasil dari Insertion Sort adalah ",insertion_sort(data))
+    table1 = PrettyTable()
+    table1.field_names = ["nama warung", "rating"]
+    for buku in tabel:
+        table1.add_row(buku)
+    print(table1)
+
+    print("\nWarung setelah di sorting by rating")
+    table = PrettyTable()
+    table.field_names = ["nama warung", "rating", "status", "jam tutup"]
+    for buku in data:
+        status = get_status(buku[1]['jam buka'], buku[1]['jam tutup'], now)
+        table.add_row([buku[0], buku[1]['rating'], status, buku[1]['jam tutup']])
+    print(table)
 
 

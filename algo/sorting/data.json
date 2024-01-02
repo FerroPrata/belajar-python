@@ -1,11 +1,92 @@
 {
-  "123": {
-    "alamat": "321",
-    "no": "321",
-    "rating": 3.4,
-    "jarak": 400,
-    "rekomendasi": 3.3546666666666667,
-    "jam buka": "07:01",
-    "jam tutup": "08:00"
+  "Ayam Venus": {
+    "alamat": "Jl. Panglima Aim, Dalam Bugis, Pontianak Timur",
+    "no": "08115681188",
+    "rating": 4.7,
+    "jarak": 4600,
+    "rekomendasi": 3.9793333333333334,
+    "jam buka": "10:00",
+    "jam tutup": "21:30"
+  },
+  "Rumah Soto": {
+    "alamat": "Jl. M Sohor No. 58, Pontanak Selatan",
+    "no": "08997775999",
+    "rating": 4.9,
+    "jarak": 5100,
+    "rekomendasi": 4.067,
+    "jam buka": "09:00",
+    "jam tutup": "21:00"
+  },
+  "Mie Ayam Bakso Bawor": {
+    "alamat": "Jl. Sejahtera 1 No. A31, Pontianak Tenggara",
+    "no": "08957463114",
+    "rating": 4.4,
+    "jarak": 3400,
+    "rekomendasi": 3.901333333333334,
+    "jam buka": "11:30",
+    "jam tutup": "22:00"
+  },
+  "Rumah Makan Puring Jaya": {
+    "alamat": "Jl. Sungai Raya Dalam, Pontianak Tenggara",
+    "no": "08135278654",
+    "rating": 3.9,
+    "jarak": 3600,
+    "rekomendasi": 3.432,
+    "jam buka": "08:00",
+    "jam tutup": "23:00"
+  },
+  "Nasi Lamongan BANDHA": {
+    "alamat": "Jl. Parit H. Husin 1, Gang Perintis No. 27A",
+    "no": "08136478442",
+    "rating": 3.5,
+    "jarak": 4200,
+    "rekomendasi": 3.01,
+    "jam buka": "07:00",
+    "jam tutup": "22:00"
+  },
+  "Rumah Makan RIO 2": {
+    "alamat": "Jl. Merdeka Barat, Pontianak Kota",
+    "no": "08936478892",
+    "rating": 4.6,
+    "jarak": 6100,
+    "rekomendasi": 3.6646666666666663,
+    "jam buka": "09:00",
+    "jam tutup": "20:45"
+  },
+  "Ayam Gepuk Pak Gembus": {
+    "alamat": "Jl. Sungai Raya Dalam No. 1, Pontianak Tenggara",
+    "no": "0895415212051",
+    "rating": 4.8,
+    "jarak": 4100,
+    "rekomendasi": 4.143999999999999,
+    "jam buka": "10:00",
+    "jam tutup": "21:45"
+  },
+  "Warung Bin Dinar": {
+    "alamat": "Tanjung Raya 2, Kompleks Permata Kapuas 2 No 24 A",
+    "no": "08145673321",
+    "rating": 4.2,
+    "jarak": 7100,
+    "rekomendasi": 3.206,
+    "jam buka": "09:00",
+    "jam tutup": "21:00"
+  },
+  "Kwetiau Akit": {
+    "alamat": "Jl. Prof M. Yamin No 2, Pontianak Kota",
+    "no": "08957778334",
+    "rating": 4.5,
+    "jarak": 5600,
+    "rekomendasi": 3.66,
+    "jam buka": "17:30",
+    "jam tutup": "23:00"
+  },
+  "Bebek Carok": {
+    "alamat": "Jl. Gusti Situt Mahmud, Pontianak Utara",
+    "no": "08135269942",
+    "rating": 4.0,
+    "jarak": 6300,
+    "rekomendasi": 3.16,
+    "jam buka": "09:00",
+    "jam tutup": "10:00"
   }
 }
