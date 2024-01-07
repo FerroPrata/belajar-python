@@ -33,7 +33,7 @@ def warung_sorting():
 def coba1():
     global array
     table = PrettyTable()
-    table.field_names = ["Nama warung", "rating", "status", "jam tutup"]
+    table.field_names = ["Nama warung", "rating", "status", "jam buka", "jam tutup"]
     for buku in array:
         jam_buka = datetime.datetime.strptime(buku[1]['jam buka'], "%H:%M").time()
         jam_tutup = datetime.datetime.strptime(buku[1]['jam tutup'], "%H:%M").time()
@@ -41,6 +41,6 @@ def coba1():
             status = "buka"
         else:
             status = "tutup"
-        table.add_row([buku[0], buku[1]['rating'], status, buku[1]['jam tutup']])
+        table.add_row([buku[0], buku[1]['rating'], status, buku[1]['jam buka'], buku[1]['jam tutup']])
     print(table)
 

@@ -24,7 +24,7 @@ def buble_sort():
 def coba():
     global array  
     table = PrettyTable()
-    table.field_names = ["Nama warung", "jarak", "status", "jam tutup"]
+    table.field_names = ["Nama warung", "jarak", "status", "jam buka", "jam tutup"]
     for buku in array:
         jam_buka = datetime.datetime.strptime(buku[1]['jam buka'], "%H:%M").time()
         jam_tutup = datetime.datetime.strptime(buku[1]['jam tutup'], "%H:%M").time()
@@ -37,7 +37,7 @@ def coba():
             jarak = f"{jrk / 1000} KM"
         else:
             jarak = f"{jrk} M"
-        table.add_row([buku[0], jarak, status, buku[1]['jam tutup']])
+        table.add_row([buku[0], jarak, status, buku[1]['jam buka'], buku[1]['jam tutup']])
         
     print(table)
 
