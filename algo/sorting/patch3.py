@@ -1,12 +1,14 @@
 import json
 from prettytable import PrettyTable
+import datetime
 
-with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
-    dataa = json.load(f)
 
-data = list(dataa.items())
+def selection_sort():
+    with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
+        dataa = json.load(f)
 
-def selection_sort(data):
+    data = list(dataa.items())
+    now = datetime.datetime.now().time()
     n = len(data)
     for i in range(n - 1):
         max_idx = i
@@ -15,12 +17,17 @@ def selection_sort(data):
                 max_idx = j
         data[i], data[max_idx] = data[max_idx], data[i]
         
-selection_sort(data)
+    table = PrettyTable()
+    table.field_names = ["Nama warung", "status", "jam tutup"]
 
-table = PrettyTable()
-table.field_names = ["Nama Rumah Makan", "Rekomendasi"]
+    for info in data:
+        jam_buka = datetime.datetime.strptime(info[1]['jam buka'], "%H:%M").time()
+        jam_tutup = datetime.datetime.strptime(info[1]['jam tutup'], "%H:%M").time()
+        if jam_buka <= now <= jam_tutup:
+            status = "buka"
+        else:
+            status = "tutup"
+        table.add_row([info[0], status, info[1]["jam tutup"]])
 
-for nama, info in data:
-    table.add_row([nama, info['rekomendasi']])
+    print(table)
 
-print(table)

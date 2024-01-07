@@ -28,18 +28,6 @@ class Tes:
         else:
             print(f"Buku dengan warung {warung} sudah ada.")
     
-    def filter_buku_by_kategori(self, kategori):
-        hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if buku_info.get("kategori") == kategori}
-        return hasil_filter
-    
-    def filter_buku_by_tahun(self, tahun):
-        hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if buku_info.get("tahun_terbit") == tahun}
-        return hasil_filter
-    
-    def filter_buku_by_nama_p(self, nama_p):
-        nama_p = nama_p.lower() #Ubah input menggunakan lower
-        hasil_filter = {judul: buku_info for judul, buku_info in self.buku.items() if nama_p in buku_info.get("Penulis").lower()} #Menggunakan fungsi in pada buku_info.get dan menambah fungsi lower diakhir
-        return hasil_filter
         
 
 def tes():

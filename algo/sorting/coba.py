@@ -3,18 +3,11 @@ import time
 from prettytable import PrettyTable
 import datetime
 
-def format_time(time_str):
-    return datetime.datetime.strptime(time_str, "%H:%M").replace(tzinfo=datetime.timezone.utc).time()
 
-def get_status(jam_buka, jam_tutup, now):
-    jam_buka = format_time(jam_buka)
-    jam_tutup = format_time(jam_tutup)
-    if jam_buka <= now <= jam_tutup:
-        return "buka"
-    else:
-        return "tutup"
 
 def warung_sorting():
+
+    global now
     with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
         dataa = json.load(f)
 
@@ -50,8 +43,14 @@ def warung_sorting():
     table = PrettyTable()
     table.field_names = ["nama warung", "rating", "status", "jam tutup"]
     for buku in data:
-        status = get_status(buku[1]['jam buka'], buku[1]['jam tutup'], now)
+        jam_buka = datetime.datetime.strptime(buku[1]['jam buka'], "%H:%M").time()
+        jam_tutup = datetime.datetime.strptime(buku[1]['jam tutup'], "%H:%M").time()
+        if jam_buka <= now <= jam_tutup:
+            status = "buka"
+        else:
+            status = "tutup"
         table.add_row([buku[0], buku[1]['rating'], status, buku[1]['jam tutup']])
     print(table)
 
+warung_sorting()
 
