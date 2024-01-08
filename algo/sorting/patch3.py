@@ -4,7 +4,7 @@ import datetime
 
 
 def selection_sort():
-    with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
+    with open("\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Tugas AKhir\\2\\data.json", "r") as f:
         dataa = json.load(f)
 
     data = list(dataa.items())
@@ -18,7 +18,7 @@ def selection_sort():
         data[i], data[max_idx] = data[max_idx], data[i]
         
     table = PrettyTable()
-    table.field_names = ["Nama warung", "status", "jam buka", "jam tutup"]
+    table.field_names = ["Nama warung", "rekomendasi", "status", "jam buka", "jam tutup"]
 
     for info in data:
         jam_buka = datetime.datetime.strptime(info[1]['jam buka'], "%H:%M").time()
@@ -27,7 +27,7 @@ def selection_sort():
             status = "buka"
         else:
             status = "tutup"
-        table.add_row([info[0], status, info[1]['jam buka'], info[1]["jam tutup"]])
+        table.add_row([info[0],info[1]['rekomendasi'], status, info[1]['jam buka'], info[1]["jam tutup"]])
 
     print(table)
 
