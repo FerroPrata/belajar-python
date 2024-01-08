@@ -16,14 +16,14 @@ def main():
     print(f"selamat datang {nama}", "\n")
     table = PrettyTable()
     table.field_names = ["Nama warung", "status", "jam buka", "jam tutup"]
-    for buku in data:
-        jam_buka = datetime.datetime.strptime(buku[1]['jam buka'], "%H:%M").time()
-        jam_tutup = datetime.datetime.strptime(buku[1]['jam tutup'], "%H:%M").time()
+    for warung in data:
+        jam_buka = datetime.datetime.strptime(warung[1]['jam buka'], "%H:%M").time()
+        jam_tutup = datetime.datetime.strptime(warung[1]['jam tutup'], "%H:%M").time()
         if jam_buka <= now <= jam_tutup:
             status = "buka"
         else:
             status = "tutup"
-        table.add_row([buku[0], status, buku[1]['jam buka'], buku[1]['jam tutup']])
+        table.add_row([warung[0], status, warung[1]['jam buka'], warung[1]['jam tutup']])
     print(table)
     min()
 

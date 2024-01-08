@@ -19,7 +19,7 @@ def selection_sort():
             if data[j][1]["rekomendasi"] > data[max_idx][1]["rekomendasi"]:
                 max_idx = j
                 data[i], data[max_idx] = data[max_idx], data[i]
-                print(f"step ke-{a + 1} : {[buku[1]['rekomendasi'] for buku in data]}, iterasi ke-{i+1}")
+                print(f"step ke-{a + 1} : {[warung[1]['rekomendasi'] for warung in data]}, iterasi ke-{i+1}")
                 a += 1
 def helo():  
     global data
