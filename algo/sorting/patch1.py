@@ -44,3 +44,4 @@ def coba1():
         table.add_row([buku[0], buku[1]['rating'], status, buku[1]['jam buka'], buku[1]['jam tutup']])
     print(table)
 
+

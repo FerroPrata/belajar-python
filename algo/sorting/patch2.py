@@ -1,13 +1,15 @@
 import json
 from prettytable import PrettyTable
 import datetime
+import time
+
 
 def buble_sort():
     global array
     global now
     with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
         dataa = json.load(f)
-
+    waktuM = time.time()
     data = list(dataa.items())
     now = datetime.datetime.now().time()
     a = 0
@@ -20,6 +22,10 @@ def buble_sort():
                 array[j], array[j + 1] = array[j + 1], array[j]
                 bukun = [buku[1]['jarak'] for buku in data] 
                 print(f"step ke {a} : {bukun}, iterasi ke {i + 1}")
+
+    waktuS = time.time()
+    waktuA = waktuS - waktuM
+    print(f'Waktu : {waktuA:.6f}')
 
 def coba():
     global array  

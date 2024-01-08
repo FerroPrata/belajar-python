@@ -1,7 +1,6 @@
 from patch1 import *
 from patch2 import *
 from patch3 import *
-
 import json
 import datetime
 from prettytable import PrettyTable
@@ -56,12 +55,14 @@ def min():
         return
     elif pilihan == 3:
         print()
+        selection_sort()
+        print()
         table = PrettyTable()
         welcome = f"hai {nama}"
         table.field_names = [welcome]
         table.add_row(["ini rekomendasi warung untuk anda"])
         print(table)
-        selection_sort()
+        helo()
         min()
         return
     elif pilihan == 0:
