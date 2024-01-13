@@ -84,3 +84,4 @@ def coba2():
         table.add_row([warung["Nama warung"], warung['rating'], warung['status'], warung['jam buka'], warung['jam tutup']])
     print(table)
 
+coba2()

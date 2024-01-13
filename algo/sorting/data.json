@@ -3,7 +3,7 @@
     "alamat": "Jl. Panglima Aim, Dalam Bugis, Pontianak Timur",
     "no": "08115681188",
     "rating": 4.7,
-    "jarak": 600,
+    "jarak": 4600,
     "rekomendasi": 3.9793333333333334,
     "jam buka": "10:00",
     "jam tutup": "21:30"
@@ -88,5 +88,14 @@
     "rekomendasi": 3.16,
     "jam buka": "09:00",
     "jam tutup": "10:00"
+  },
+  "nasi kuning butet": {
+    "alamat": "jalan ayani",
+    "no": "082253889636",
+    "rating": 4.3,
+    "jarak": 1300,
+    "rekomendasi": 4.113666666666666,
+    "jam buka": "05:00",
+    "jam tutup": "12:00"
   }
 }

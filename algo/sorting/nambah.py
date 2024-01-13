@@ -1,7 +1,7 @@
 from fungsi import Tes
 from datetime import datetime
 
-def tambah_buku():
+def tambah_warung():
     jam_buka_str = input("Masukkan jam buka dalam format HH:MM: ")
     try:
         jam_buka = datetime.strptime(jam_buka_str, '%H:%M').time()
@@ -20,10 +20,10 @@ def tambah_buku():
     warung = input("Nama warung : ")
     alamat = input("Masukkan alamat: ")
     no = input("masukan nomor yang dapat di hubungi : ")
-    rating = float(input("masukan rating tokoh : "))
-    jarak = int (input("masukan jarak tokoh dari rumah mu : "))
-    rekomendasi = rating * (1 - jarak / jarakm)
+    rating = float(input("masukan rating warung : "))
+    jarak = int (input("masukan jarak warung dari rumah mu (Meter): "))
+    rekomendasi = rating * (1 - (jarak / jarakm))
     ts_instance.tambah_warung(warung, alamat, no, rating, jarak, rekomendasi, jam_buka.strftime('%H:%M'), jam_tutup.strftime('%H:%M'))
     ts_instance.save_to_file()
 
-tambah_buku()
+tambah_warung()

@@ -6,7 +6,7 @@ import datetime
 def selection_sort():
     global data
     global now
-    with open("D:/backup data 2023/optional/belajar python/algo/sorting/data.json", "r") as f:
+    with open("\\Users\\Lenovo\\Documents\\Algoritma Dasar\\Tugas AKhir\\3\\data.json", "r") as f:
         dataa = json.load(f)
 
     data = list(dataa.items())
@@ -25,21 +25,22 @@ def helo():
     global data
     global now 
     table = PrettyTable()
-    table.field_names = ["Nama warung", "rating","jarak", "status", "jam buka", "jam tutup"]
+    table.field_names = ["Nama warung", "rekomendasi", "rating","jarak", "status", "jam buka", "jam tutup"]
 
-    for info in data:
-        jam_buka = datetime.datetime.strptime(info[1]['jam buka'], "%H:%M").time()
-        jam_tutup = datetime.datetime.strptime(info[1]['jam tutup'], "%H:%M").time()
+    for warung in data:
+        jam_buka = datetime.datetime.strptime(warung[1]['jam buka'], "%H:%M").time()
+        jam_tutup = datetime.datetime.strptime(warung[1]['jam tutup'], "%H:%M").time()
         if jam_buka <= now <= jam_tutup:
             status = "buka"
         else:
             status = "tutup"
-        jrk = info[1]['jarak']
+        jrk = warung[1]['jarak']
         if jrk > 1000:
             jarak = f"{jrk / 1000} KM"
         else:
             jarak = f"{jrk} M"
-        table.add_row([info[0], info[1]["rating"], jarak, status, info[1]['jam buka'], info[1]["jam tutup"]])
+        table.add_row([warung[0], "{:.1f}".format(warung[1]['rekomendasi']), warung[1]["rating"], jarak, status, warung[1]['jam buka'], warung[1]["jam tutup"]])
+
 
 
     print(table)
